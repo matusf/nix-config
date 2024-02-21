@@ -105,6 +105,8 @@
     packages = with pkgs; [
       firefox
     #  thunderbird
+    ] ++ [
+      inputs.home-manager.packages.${pkgs.system}.default
     ];
   };
 
