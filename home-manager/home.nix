@@ -44,7 +44,6 @@
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_STATE_HOME = "$HOME/.local/state";
     XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_DATA_DIRS = "/usr/local/share/:/usr/share/:/var/lib/snapd/desktop/:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
 
     # DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
 
