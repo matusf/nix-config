@@ -299,6 +299,16 @@ in {
         };
       };
     };
+
+    gpg = {
+      enable = true;
+      homedir = "${config.xdg.dataHome}/gnupg";
+    };
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   # Nicely reload system units when changing configs
