@@ -1,12 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, outputs, config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
     # If you want to use modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
@@ -18,11 +21,11 @@
     # ./users.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
-      ./hardware-configuration.nix
-    ];
+    ./hardware-configuration.nix
+  ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {inherit inputs outputs;};
     users = {
       # Import your home-manager configuration
       matus = import ../home-manager/home.nix;
@@ -102,13 +105,15 @@
   users.users.matus = {
     isNormalUser = true;
     description = "Matus Ferech";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-    #  thunderbird
-    ] ++ [
-      inputs.home-manager.packages.${pkgs.system}.default
-    ];
+    extraGroups = ["networkmanager" "wheel"];
+    packages = with pkgs;
+      [
+        firefox
+        #  thunderbird
+      ]
+      ++ [
+        inputs.home-manager.packages.${pkgs.system}.default
+      ];
     shell = pkgs.fish;
   };
 
@@ -118,8 +123,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -151,5 +156,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }
