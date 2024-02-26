@@ -72,6 +72,7 @@
   services.xserver = {
     layout = "us";
     xkbVariant = "";
+    xkbOptions = "caps:swapescape";
   };
 
   # Enable CUPS to print documents.
@@ -108,6 +109,7 @@
     ] ++ [
       inputs.home-manager.packages.${pkgs.system}.default
     ];
+    shell = pkgs.fish;
   };
 
   # Allow unfree packages
@@ -122,6 +124,9 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
+  programs = {
+    fish.enable = true;
+  };
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
   #   enable = true;
