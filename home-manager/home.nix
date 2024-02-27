@@ -224,6 +224,13 @@ in {
       enable = true;
       package = pkgs.vscodium;
       extensions = with pkgs.vscode-extensions; [
+        jnoortheen.nix-ide
+        ms-python.python
+        golang.go
+        ms-kubernetes-tools.vscode-kubernetes-tools
+        davidanson.vscode-markdownlint
+        # charliermarsh.ruff
+        rust-lang.rust-analyzer
       ];
       keybindings = [
         {
