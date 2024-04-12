@@ -23,6 +23,12 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
+  nix = {
+    settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes repl-flake";
+    };
+  };
 
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
@@ -109,7 +115,7 @@
     packages = with pkgs;
       [
         firefox
-        #  thunderbird
+        # thunderbird
       ]
       ++ [
         inputs.home-manager.packages.${pkgs.system}.default
