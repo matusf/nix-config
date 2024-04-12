@@ -310,6 +310,24 @@ in {
       enable = true;
       homedir = "${config.xdg.dataHome}/gnupg";
     };
+
+    firefox = {
+      enable = true;
+      profiles.matus = {
+        extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+          ublock-origin
+          sponsorblock
+          darkreader
+          duckduckgo-privacy-essentials
+          keepassxc-browser
+          news-feed-eradicator
+          ublacklist
+          facebook-container
+          multi-account-containers
+          jump-cutter
+        ];
+      };
+    };
   };
 
   services.gpg-agent = {
