@@ -98,6 +98,7 @@ in {
     ripgrep
     ripgrep-all
     tealdeer
+    keepassxc
 
     # Python development
     python311Packages.bpython
