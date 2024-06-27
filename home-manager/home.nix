@@ -23,6 +23,8 @@
     RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
     BASH_COMPLETION_USER_FILE = "$XDG_CONFIG_HOME/bash-completion/bash_completion";
     DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker";
+    KUBECONFIG="$XDG_CONFIG_HOME/kube";
+    KUBECACHEDIR="$XDG_CACHE_HOME/kube";
     _JAVA_OPTIONS = ''-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java'';
     VAGRANT_HOME = "$XDG_DATA_HOME/vagrant";
     VAGRANT_ALIAS_FILE = "$XDG_DATA_HOME/vagrant/aliases";
