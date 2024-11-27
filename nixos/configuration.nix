@@ -137,6 +137,7 @@
   # started in user sessions.
   programs = {
     fish.enable = true;
+    dconf.enable = true;
   };
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {

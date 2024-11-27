@@ -23,8 +23,8 @@
     RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
     BASH_COMPLETION_USER_FILE = "$XDG_CONFIG_HOME/bash-completion/bash_completion";
     DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker";
-    KUBECONFIG="$XDG_CONFIG_HOME/kube";
-    KUBECACHEDIR="$XDG_CACHE_HOME/kube";
+    KUBECONFIG = "$XDG_CONFIG_HOME/kube";
+    KUBECACHEDIR = "$XDG_CACHE_HOME/kube";
     _JAVA_OPTIONS = ''-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java'';
     VAGRANT_HOME = "$XDG_DATA_HOME/vagrant";
     VAGRANT_ALIAS_FILE = "$XDG_DATA_HOME/vagrant/aliases";
@@ -76,10 +76,10 @@ in {
     ];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
+      allowUnfreePredicate = pkg:
+        builtins.elem (lib.getName pkg) [
+          "slack"
+        ];
     };
   };
 
@@ -94,6 +94,7 @@ in {
     htop
     strace
     jq
+    fd
     vim
     podman
     bat
@@ -102,6 +103,14 @@ in {
     tealdeer
     keepassxc
 
+    pkgs.gnomeExtensions.appindicator
+
+    telegram-desktop
+    signal-desktop
+    slack
+    brave
+
+    tilix
     # Python development
     python311Packages.bpython
     ruff
@@ -167,6 +176,10 @@ in {
   home.sessionPath = ["$HOME/.local/bin" "$CARGO_HOME/bin" "$XDG_DATA_HOME/go"];
 
   programs = {
+    thunderbird = {
+      enable = true;
+      profiles = {};
+    };
     home-manager.enable = true;
     fish = {
       enable = true;
@@ -330,6 +343,50 @@ in {
           jump-cutter
         ];
       };
+    };
+    # gnome-shell = {
+    #   enable = true;
+    #   extensions = [
+    #     {
+    #       package = pkgs.gnomeExtensions.appindicator;
+    #     }
+    #   ];
+    # };
+  };
+  dconf.settings = {
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+      favorite-apps = [
+        "firefox.desktop"
+        "brave-browser.desktop"
+        "org.gnome.Nautilus.desktop"
+        "slack.desktop"
+        "signal-desktop.desktop"
+        "codium.desktop"
+        "org.telegram.desktop.desktop"
+        "thunderbird.desktop"
+        "com.gexperts.Tilix.desktop"
+        "org.gnome.Settings.desktop"
+      ];
+      enabled-extensions = [
+        "appindicatorsupport@rgcjonas.gmail.com"
+      ];
+    };
+
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "Terminal";
+      command = "tilix";
+      binding = "<Ctrl><Alt>t";
     };
   };
 
